@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RepositoryRestController
 public class ProductoPersonalizadoControllerComplement {
@@ -68,5 +69,14 @@ public class ProductoPersonalizadoControllerComplement {
             }
         }
             return ResponseEntity.notFound().build();
+    }
+    @GetMapping( "/productosPersonalizado/search/{ProductoPersonalizadoNombre}" )
+    public @ResponseBody ResponseEntity<List<ProductoPersonalizado>> searchProductoName(@PathVariable("ProductoPersonalizadoNombre") String nombre){
+        if(repo_producto_personalizado.findByNombreContaining(nombre) != null){
+            List<ProductoPersonalizado> productos = repo_producto_personalizado.findByNombreContaining(nombre);
+            return new ResponseEntity< List<ProductoPersonalizado> >(productos, HttpStatus.OK);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

@@ -6,8 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @RepositoryRestResource( path="vendedor" )
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
     //aca van los request o response custom
     public Vendedor findByNombre(String nombre);
+    public List<Vendedor> findByNombreContaining(String nombre);
 }

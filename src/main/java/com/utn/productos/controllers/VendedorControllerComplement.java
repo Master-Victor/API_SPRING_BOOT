@@ -108,4 +108,13 @@ public class VendedorControllerComplement {
         }
         return ResponseEntity.notFound().build();
     }
+    @GetMapping( "/vendedor/search/{vendedorNombre}" )
+    public @ResponseBody ResponseEntity< List<Vendedor> > searchProductoName(@PathVariable("vendedorNombre") String nombre){
+        if(repo_usuario.findByNombreContaining(nombre) != null){
+            List<Vendedor> vendedores = repo_Vendedor.findByNombreContaining(nombre);
+            return new ResponseEntity< List<Vendedor> >(vendedores, HttpStatus.OK);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

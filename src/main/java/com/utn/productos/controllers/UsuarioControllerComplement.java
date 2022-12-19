@@ -88,6 +88,15 @@ public class UsuarioControllerComplement {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping( "/usuario/search/{UsuarioNombre}" )
+    public @ResponseBody ResponseEntity< List<Usuario> > searchProductoName(@PathVariable("UsuarioNombre") String nombre){
+        if(repo_usuario.findByNombreContaining(nombre) != null){
+            List<Usuario> usuarios = repo_usuario.findByNombreContaining(nombre);
+            return new ResponseEntity< List<Usuario> >(usuarios, HttpStatus.OK);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 //    @GetMapping("/compra/{compraID}")
 //    public @ResponseBody ResponseEntity< CompraDTO > obtenerCompra(@PathVariable("compraID") Long id) {
 //        CompraDTO compra = new CompraDTO(repo_compra.findById(id).get());

@@ -18,4 +18,5 @@ public interface ProductoPersonalizacionRepository extends JpaRepository<Product
 //    @Override
 //    void delete(ProductoPersonalizacion entity);
     public ProductoPersonalizado findByNombre( String nombre );
+    public List<ProductoPersonalizado> findByNombreContaining( String nombre );
 }
