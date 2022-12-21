@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
 
 @RepositoryRestController
 public class UsuarioControllerComplement {
@@ -54,12 +55,14 @@ public class UsuarioControllerComplement {
 //            return ResponseEntity.notFound().build();
 //        }
 //    }
-    @GetMapping("/usuario/{usuarioID}/compras")
-    public @ResponseBody ResponseEntity< List<CompraDTO> > obtenerCompras(@PathVariable("usuarioID") Long id) {
+    @GetMapping("/usuario/{username}/compras")
+    public @ResponseBody ResponseEntity< List<CompraDTO> > obtenerCompras(@PathVariable("username") String username) {
+        System.out.println(username);
             List<Compra> compras = repo_compra.findAll().stream().filter(c ->
-                c.getUsuario().getId() == id
+                c.getUsuario().getNombre().equals(username)
              ).collect(Collectors.toList());
             List<CompraDTO> comprasDTO = compras.stream().map( c -> new CompraDTO(c) ).collect(Collectors.toList());
+
             return new ResponseEntity< List<CompraDTO> >(comprasDTO, HttpStatus.OK);
     }
     @PostMapping("/usuario/{usuarioID}/compra")
@@ -72,9 +75,6 @@ public class UsuarioControllerComplement {
                 productos.add( repo_producto_personalizado.findByNombre(p) );
             }
         } );
-//        System.out.println("Vendedor: "+vendedor.getNombre());
-//        System.out.println("Usuario: "+usuario.getNombre());
-//        System.out.println("Compras: "+productos.stream().map( c -> c.getNombre() ).collect(Collectors.toList()));
         if (vendedor != null && usuario != null && productos.size() > 0) {
             Compra compraDB = new Compra();
             compraDB.setVendedor(vendedor);

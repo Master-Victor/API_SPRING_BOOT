@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
 
 @RepositoryRestController
 public class ProductoPersonalizadoControllerComplement {

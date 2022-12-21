@@ -8,6 +8,7 @@ import org.springframework.data.rest.core.config.Projection;
 public interface DTOproductoBase {
 //    @Value( "#{target.texto}, #{target.id}" )
     String getNombre();
+    Long getId();
 //    Long getPrecioExtra();
 
 }

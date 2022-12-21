@@ -32,6 +32,7 @@ public class VendedorControllerComplement {
     CompraRepository repo_compra;
     @PostMapping("/vendedor/{vendedorID}/compra")
     public @ResponseBody ResponseEntity<CompraDTO> agregarCompraVendedor(@PathVariable("vendedorID") Long id, @RequestBody @Valid CompraDTO compra ) {
+//        System.out.println(compra);
         Vendedor vendedor = repo_Vendedor.findById(id).get();
         Usuario usuario = repo_usuario.findByNombre( compra.getUsuario() );
         List<ProductoPersonalizado> productos = new ArrayList<>();

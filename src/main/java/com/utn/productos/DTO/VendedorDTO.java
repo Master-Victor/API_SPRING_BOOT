@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Setter
 @Getter
 public class VendedorDTO {
+        private Long id;
         private String nombre;
         private String contrasenia;
         private List<Long> compras;
@@ -26,6 +27,7 @@ public class VendedorDTO {
                 this.productos = productos;
         }
         public VendedorDTO(Vendedor vendedor){
+                this.id = vendedor.getId();
                 this.nombre = vendedor.getNombre();
                 this.contrasenia = vendedor.getContrasenia();
                 this.compras = vendedor.getCompras().stream().map( c -> c.getId() ).collect(Collectors.toList());

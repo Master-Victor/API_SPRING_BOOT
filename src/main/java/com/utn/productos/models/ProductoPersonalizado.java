@@ -60,7 +60,7 @@ public class ProductoPersonalizado extends EntidadPersistente{
         this.fotos = new ArrayList<>( producto_personalizado.getFotos() );
         this.stock = producto_personalizado.getStock();
         this.productoBase = productoBase;
-        this.visible = true;
+        this.visible = producto_personalizado.isVisible();
     }
     public boolean pauseProductoPersonalizado(){
         this.visible = false;

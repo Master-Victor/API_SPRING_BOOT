@@ -39,7 +39,7 @@ public class ProductoPersonalizadoDTO {
                 this.stock = producto.getStock();
                 this.fotos = producto.getFotos();
                 this.productoBase = producto.getProductoBase().getNombre();
-                this.visible = true;
+                this.visible = producto.isVisible();
         }
 }
 
