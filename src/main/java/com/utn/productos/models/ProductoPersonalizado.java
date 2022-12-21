@@ -25,6 +25,7 @@ public class ProductoPersonalizado extends EntidadPersistente{
     private String color;
     private Long total;
     private Long stock;
+    private boolean visible;
     @ElementCollection
     @CollectionTable( name = "fotos_producto_personalizado", joinColumns = @JoinColumn( name = "id"))
     @Column( name = "ruta")
@@ -47,6 +48,7 @@ public class ProductoPersonalizado extends EntidadPersistente{
         this.fotos = new ArrayList<>();
         this.stock = stock;
         this.productoBase = new ProductoBase();
+        this.visible  = true;
     }
     public ProductoPersonalizado(ProductoPersonalizadoDTO producto_personalizado, ProductoBase productoBase) {
         this.nombre = producto_personalizado.getNombre();
@@ -58,5 +60,14 @@ public class ProductoPersonalizado extends EntidadPersistente{
         this.fotos = new ArrayList<>( producto_personalizado.getFotos() );
         this.stock = producto_personalizado.getStock();
         this.productoBase = productoBase;
+        this.visible = true;
+    }
+    public boolean pauseProductoPersonalizado(){
+        this.visible = false;
+        return this.visible;
+    }
+    public boolean playProductoPersonalizado(){
+        this.visible = true;
+        return this.visible;
     }
 }

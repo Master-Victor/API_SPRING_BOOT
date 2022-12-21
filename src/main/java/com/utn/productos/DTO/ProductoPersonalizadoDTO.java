@@ -16,7 +16,7 @@ public class ProductoPersonalizadoDTO {
         private Long stock;
         private List<String> fotos;
         private String productoBase;
-
+        private boolean visible;
         public ProductoPersonalizadoDTO(String nombre, Long precioExtra, String descripcion, List<String> estampado, String color, Long total, Long stock, List<String> fotos, String productoBase) {
                 this.nombre = nombre;
                 this.precioExtra = precioExtra;
@@ -27,6 +27,7 @@ public class ProductoPersonalizadoDTO {
                 this.stock = stock;
                 this.fotos = fotos;
                 this.productoBase = productoBase;
+                this.visible = true;
         }
         public ProductoPersonalizadoDTO(ProductoPersonalizado producto) {
                 this.nombre = producto.getNombre();
@@ -38,6 +39,7 @@ public class ProductoPersonalizadoDTO {
                 this.stock = producto.getStock();
                 this.fotos = producto.getFotos();
                 this.productoBase = producto.getProductoBase().getNombre();
+                this.visible = true;
         }
 }
 

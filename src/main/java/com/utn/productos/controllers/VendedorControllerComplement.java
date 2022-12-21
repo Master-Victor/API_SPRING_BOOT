@@ -108,6 +108,28 @@ public class VendedorControllerComplement {
         }
         return ResponseEntity.notFound().build();
     }
+    @PostMapping( "/vendedor/{vendedorID}/productoPersonalizado/{ProductoPersonalizadoID}/pause" )
+    public @ResponseBody ResponseEntity< ProductoPersonalizadoDTO > pausarProductoPersonalizadoVendedor(@PathVariable("vendedorID") Long idVendedor, @PathVariable("ProductoPersonalizadoID") Long idProductoPersonalizado){
+        if( repo_Vendedor.existsById(idVendedor) && repo_producto_personalizado.existsById(idProductoPersonalizado)){
+            Vendedor vendedor = repo_Vendedor.findById(idVendedor).get();
+            ProductoPersonalizado producto = repo_producto_personalizado.findById(idProductoPersonalizado).get();
+            producto.pauseProductoPersonalizado();
+            repo_producto_personalizado.save(producto);
+            return new ResponseEntity< ProductoPersonalizadoDTO >( new ProductoPersonalizadoDTO(producto), HttpStatus.OK);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    @PostMapping( "/vendedor/{vendedorID}/productoPersonalizado/{ProductoPersonalizadoID}/play" )
+    public @ResponseBody ResponseEntity< ProductoPersonalizadoDTO > playProductoPersonalizadoVendedor(@PathVariable("vendedorID") Long idVendedor, @PathVariable("ProductoPersonalizadoID") Long idProductoPersonalizado){
+        if( repo_Vendedor.existsById(idVendedor) && repo_producto_personalizado.existsById(idProductoPersonalizado)){
+            Vendedor vendedor = repo_Vendedor.findById(idVendedor).get();
+            ProductoPersonalizado producto = repo_producto_personalizado.findById(idProductoPersonalizado).get();
+            producto.playProductoPersonalizado();
+            repo_producto_personalizado.save(producto);
+            return new ResponseEntity< ProductoPersonalizadoDTO >( new ProductoPersonalizadoDTO(producto), HttpStatus.OK);
+        }
+        return ResponseEntity.notFound().build();
+    }
     @GetMapping( "/vendedor/search/{vendedorNombre}" )
     public @ResponseBody ResponseEntity< List<Vendedor> > searchProductoName(@PathVariable("vendedorNombre") String nombre){
         if(repo_usuario.findByNombreContaining(nombre) != null){
